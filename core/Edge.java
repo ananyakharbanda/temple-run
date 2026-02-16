@@ -1,4 +1,6 @@
-class Edge implements Comparable<Edge>{
+package core;
+
+public class Edge implements Comparable<Edge>{
     private int src;
     private int dest;
     private double weight;

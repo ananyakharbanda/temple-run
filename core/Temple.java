@@ -1,4 +1,6 @@
-class Temple {
+package core;
+
+public class Temple {
     private final int id;
     private String name;
     private double lat;

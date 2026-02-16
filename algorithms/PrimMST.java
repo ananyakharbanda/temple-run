@@ -1,3 +1,7 @@
+package algorithms;
+
+import core.Edge;
+import core.Graph;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,7 +35,7 @@ public class PrimMST {
     }
 
     private void mstCalcHelper(int start) {
-        List<Edge> vertexAdjacencyList = this.g.getNeighbors(start);
+        List<Edge> vertexAdjacencyList = this.g.getNeighbours(start);
         visited[start] = true;
         
         for (Edge e : vertexAdjacencyList) {
@@ -52,7 +56,7 @@ public class PrimMST {
             visited[destIndex] = true;
             parent[destIndex] = min.getSrc();
             
-            List<Edge> vertexAdjacencyList2 = this.g.get(min.getDest());
+            List<Edge> vertexAdjacencyList2 = this.g.getNeighbours(min.getDest());
                 
             for (Edge e : vertexAdjacencyList2) {
                 if (!visited[e.getDest()]) {
