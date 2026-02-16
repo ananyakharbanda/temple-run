@@ -1,4 +1,4 @@
-class Edge {
+class Edge implements Comparable<Edge>{
     private int src;
     private int dest;
     private double weight;
@@ -7,5 +7,22 @@ class Edge {
         this.src = src;
         this.dest = dest;
         this.weight = weight;   
+    }
+    
+    public int getSrc() {
+        return src;
+    }
+    
+    public int getDest() {
+        return dest;
+    }
+    
+    public double getWeight() {
+        return weight;
+    }
+    
+    @Override
+    public int compareTo(Edge other) {
+        return Double.compare(this.getWeight(), other.getWeight());
     }
 }
