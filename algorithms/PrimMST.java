@@ -3,7 +3,6 @@ package algorithms;
 import core.Edge;
 import core.Graph;
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.PriorityQueue;
 
@@ -16,54 +15,67 @@ public class PrimMST {
     private boolean[] visited;
     private int n;
 
-    public int[] parent;
+    private int[] parent;
+    private double totalWeight;
 
     public PrimMST(Graph g) {
         this.g = g;
         this.n = g.size();
+
         this.parent = new int[n];
         this.visited = new boolean[n];
-
-        Arrays.fill(parent, NO_PARENT);
 
         this.minHeap = new PriorityQueue<>((a, b) -> Double.compare(a.getWeight(), b.getWeight()));
     }
 
     public int[] mstCalc(int start) {
+        Arrays.fill(parent, NO_PARENT);
+        Arrays.fill(visited, false);
+        minHeap.clear();
+        totalWeight = 0;
+
         mstCalcHelper(start);
-        return this.parent;
+
+        return parent;
     }
 
     private void mstCalcHelper(int start) {
-        List<Edge> vertexAdjacencyList = this.g.getNeighbours(start);
         visited[start] = true;
-        
-        for (Edge e : vertexAdjacencyList) {
-            this.minHeap.add(e);
+
+        for (Edge e : g.getNeighbours(start)) {
+            minHeap.add(e);
         }
-        
+
         int count = 0;
-        while(count < n - 1 && !minHeap.isEmpty()) {
+
+        while (count < n - 1 && !minHeap.isEmpty()) {
             Edge min = minHeap.poll();
             int destIndex = min.getDest();
-            
+
             if (visited[destIndex]) {
                 continue;
             }
-            
+
             count++;
-            
+
             visited[destIndex] = true;
             parent[destIndex] = min.getSrc();
-            
-            List<Edge> vertexAdjacencyList2 = this.g.getNeighbours(min.getDest());
-                
-            for (Edge e : vertexAdjacencyList2) {
+
+            totalWeight += min.getWeight();
+
+            for (Edge e : g.getNeighbours(destIndex)) {
                 if (!visited[e.getDest()]) {
-                    this.minHeap.add(e);
+                    minHeap.add(e);
                 }
             }
         }
     }
-}
 
+    public int[] getParent() {
+        return parent;
+    }
+
+    public double getTotalWeight() {
+        return totalWeight;
+    }
+}
