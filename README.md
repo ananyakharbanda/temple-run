@@ -4,7 +4,7 @@ temple-run
 a small graph theory experiment.
 
 goal:
-visit all 7 major sikh gurdwaras in singapore starting from central sikh temple,
+visit all 7 major sikh gurdwaras (temples) in singapore starting from central sikh temple,
 using classical graph algorithms instead of a maps api.
 
 model:
@@ -21,16 +21,6 @@ compare:
 2) brute-force tsp (exact)
    O(n!)  where n = 7 (6! = 720 permutations)
 
-core idea in code:
-
-PrimMST prim = new PrimMST(graph);
-int[] parent = prim.mstCalc(0);
-
-DFSRoute dfs = new DFSRoute(mstTree);
-List<Integer> approxRoute = dfs.getRoute(0);
-
-BruteForceTSP tsp = new BruteForceTSP(graph);
-List<Integer> optimalRoute = tsp.solve(0);
 
 what it shows:
 - mst minimizes connection cost, not traversal cost
